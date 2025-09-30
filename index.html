@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Instagram Redirect</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #fafafa;
+      font-family: sans-serif;
+    }
+    a {
+      display: inline-block;
+      padding: 12px 24px;
+      font-size: 18px;
+      background: #3897f0;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <a id="insta-btn" href="#">Open Instagram</a>
+
+  <script>
+    // Get query param function
+    function getQueryParam(name) {
+      const params = new URLSearchParams(window.location.search);
+      return params.get(name);
+    }
+
+    // Extract username from Instagram URL
+    function extractUsername(url) {
+      try {
+        const u = new URL(url);
+        return u.pathname.split('/').filter(Boolean)[0];
+      } catch (e) {
+        return null;
+      }
+    }
+
+    // Detect iOS vs Android
+    function getOS() {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      if (/android/i.test(ua)) return "Android";
+      if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return "iOS";
+      return "Other";
+    }
+
+    (function () {
+      const instaUrl = getQueryParam("instagram");
+      const username = extractUsername(instaUrl);
+      const os = getOS();
+      const btn = document.getElementById("insta-btn");
+
+      if (!username) {
+        btn.textContent = "Invalid Instagram link";
+        btn.removeAttribute("href");
+        return;
+      }
+
+      if (os === "iOS") {
+        btn.href = `instagram://user?username=${username}`;
+      } else if (os === "Android") {
+        btn.href = `intent://www.instagram.com/${username}#Intent;package=com.instagram.android;scheme=https;end`;
+      } else {
+        btn.style.display = "none"; // hide button if not iOS/Android
+      }
+    })();
+  </script>
+</body>
+</html>
