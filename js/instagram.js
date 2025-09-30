@@ -1,17 +1,12 @@
-function handleInstagram(url, os) {
+function handleInstagram(value, os) {
   const name = "Instagram";
-  try {
-    const u = new URL(url);
-    const username = u.pathname.split('/').filter(Boolean)[0];
-    if (!username) return null;
-
+  const iosLink = `instagram://user?username=${value}`;
+  const androidLink = `intent://www.instagram.com/${value}#Intent;package=com.instagram.android;scheme=https;end`;
+  let href;
     if (os === "iOS") {
-      return { href: `instagram://user?username=${username}`, name };
+      href = iosLink;
     } else if (os === "Android") {
-      return { href: `intent://www.instagram.com/${username}#Intent;package=com.instagram.android;scheme=https;end`, name };
+      href = androidLink;
     }
-    return null;
-  } catch {
-    return null;
-  }
+  return { href, name };
 }

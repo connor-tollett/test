@@ -1,17 +1,12 @@
-function handleDoorDash(url, os) {
+function handleDoorDash(value, os) {
   const name = "DoorDash";
-  try {
-    const u = new URL(url);
-    const storeId = u.pathname.split('/').filter(Boolean).pop();
-    if (!storeId) return null;
-
+  const iosLink = `doordash://store/${value}`;
+  const androidLink = `intent://store/${value}#Intent;package=com.dd.doordash;scheme=doordash;end`;
+  let href;
     if (os === "iOS") {
-      return { href: `doordash://store/${storeId}`, name };
+      href = iosLink;
     } else if (os === "Android") {
-      return { href: `intent://store/${storeId}#Intent;package=com.dd.doordash;scheme=doordash;end`, name };
+      href = androidLink;
     }
-    return null;
-  } catch {
-    return null;
-  }
+  return { href, name };
 }

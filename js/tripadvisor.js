@@ -1,14 +1,12 @@
-function handleTripAdvisor(url, os) {
+function handleTripAdvisor(value, os) {
   const name = "TripAdvisor";
-  try {
-    const path = url.replace(/^https?:\/\//, ""); // strip scheme
+  const iosLink = `tripadvisor://${value}`;
+  const androidLink = `intent://${value}/#Intent;package=com.tripadvisor.tripadvisor;scheme=https;end`;
+  let href;
     if (os === "iOS") {
-      return { href: `tripadvisor://${path}`, name };
+      href = iosLink;
     } else if (os === "Android") {
-      return { href: `intent://${path}/#Intent;package=com.tripadvisor.tripadvisor;scheme=https;end`, name };
+      href = androidLink;
     }
-    return null;
-  } catch {
-    return null;
-  }
+  return { href, name };
 }

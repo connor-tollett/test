@@ -1,17 +1,12 @@
-function handleX(url, os) {
+function handleX(value, os) {
   const name = "X";
-  try {
-    const u = new URL(url);
-    const username = u.pathname.split('/').filter(Boolean)[0];
-    if (!username) return null;
-
+  const iosLink = `twitter://user?screen_name=${value}`;
+  const androidLink = `intent://twitter.com/${value}#Intent;package=com.twitter.android;scheme=https;end`;
+  let href;
     if (os === "iOS") {
-      return { href: `twitter://user?screen_name=${username}`, name };
+      href = iosLink;
     } else if (os === "Android") {
-      return { href: `intent://twitter.com/${username}#Intent;package=com.twitter.android;scheme=https;end`, name };
+      href = androidLink;
     }
-    return null;
-  } catch {
-    return null;
-  }
+  return { href, name };
 }
