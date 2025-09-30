@@ -10,3 +10,11 @@ function getOS() {
   if (/iPad|iPhone|iPod/.test(ua) && !window.MSStream) return "iOS";
   return "Other";
 }
+
+function selectHref(os, iosLink, androidLink) {
+  if (os === "iOS") {
+    return iosLink;
+  } else if (os === "Android") {
+    return androidLink;
+  }
+}
