@@ -1,21 +1,35 @@
 (function () {
   const os = getOS();
-  const btn = document.getElementById("app-btn");
-  let href = null;
+  const container = document.body;
 
-  if (getQueryParam("instagram")) {
-    href = handleInstagram(getQueryParam("instagram"), os);
-  } else if (getQueryParam("x")) {
-    href = handleX(getQueryParam("x"), os);
-  } else if (getQueryParam("doordash")) {
-    href = handleDoorDash(getQueryParam("doordash"), os);
-  } else if (getQueryParam("tripadvisor")) {
-    href = handleTripAdvisor(getQueryParam("tripadvisor"), os);
+  const apps = {
+    instagram: handleInstagram,
+    x: handleX,
+    doordash: handleDoorDash,
+    tripadvisor: handleTripAdvisor
+  };
+
+  let buttonsCreated = false;
+
+  for (const [param, handler] of Object.entries(apps)) {
+    const paramVal = getQueryParam(param);
+    if (paramVal) {
+      const result = handler(paramVal, os);
+      if (result) {
+        const btn = document.createElement("a");
+        btn.href = result.href;
+        btn.textContent = `Open in ${result.name}`;
+        btn.className = "app-btn";
+        container.appendChild(btn);
+        buttonsCreated = true;
+      }
+    }
   }
 
-  if (href) {
-    btn.href = href;
+  const placeholder = document.getElementById("app-btn");
+  if (buttonsCreated) {
+    placeholder.remove();
   } else {
-    btn.style.display = "none"; // hide if nothing matched
+    placeholder.style.display = "none";
   }
 })();
