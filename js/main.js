@@ -3,6 +3,7 @@
   const container = document.body;
 
   const apps = {
+    tiktok: handleTikTok,
     instagram: handleInstagram,
     x: handleX,
     doordash: handleDoorDash,
