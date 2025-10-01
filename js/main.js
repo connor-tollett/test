@@ -3,6 +3,7 @@
   const container = document.body;
 
   const apps = {
+    facebook: handleFaceBook,
     youtube: handleYouTube,
     yelp: handleYelp,
     tiktok: handleTikTok,
