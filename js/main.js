@@ -11,6 +11,8 @@
     if (lastVisitTime) {
       const timeDifference = getTimeDifferenceInMinutes(lastVisitTime, currentTime);
       if (timeDifference >= REDIRECT_THRESHOLD_MINUTES) {
+        // Clear the timestamp before redirecting to reset the cycle
+        localStorage.removeItem('lastVisitTime');
         window.location.href = 'com.amazon.mobile.shopping.web://amazon.ca/deals';
         return true;
       }
