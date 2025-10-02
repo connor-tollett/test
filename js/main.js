@@ -4,12 +4,7 @@
 
   const apps = {
     ubereats: handleUberEats,
-    facebook: handleFaceBook,
-    youtube: handleYouTube,
     yelp: handleYelp,
-    tiktok: handleTikTok,
-    instagram: handleInstagram,
-    x: handleX,
     doordash: handleDoorDash,
     tripadvisor: handleTripAdvisor
   };
