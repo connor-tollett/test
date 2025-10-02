@@ -18,6 +18,7 @@
       }
     }
     
+    // Only set the timestamp if we're NOT redirecting
     setLastVisitTime(currentTime);
     return false;
   }
