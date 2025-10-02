@@ -11,7 +11,7 @@
     if (lastVisitTime) {
       const timeDifference = getTimeDifferenceInMinutes(lastVisitTime, currentTime);
       if (timeDifference >= REDIRECT_THRESHOLD_MINUTES) {
-        window.location.href = 'https://amazon.com';
+        window.location.href = 'com.amazon.mobile.shopping.web://amazon.ca/deals';
         return true;
       }
     }
