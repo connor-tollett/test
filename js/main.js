@@ -3,6 +3,11 @@
   const container = document.body;
 
   const apps = {
+    instagram: handleInstaGram,
+    youtube: handleYouTube,
+    x: handleX,
+    tiktok: handleTikTok,
+    facebook: handleFaceBook,
     ubereats: handleUberEats,
     yelp: handleYelp,
     doordash: handleDoorDash,
