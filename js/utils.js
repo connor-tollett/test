@@ -18,3 +18,17 @@ function selectHref(os, iosLink, androidLink) {
     return androidLink;
   }
 }
+
+// Add these new functions to utils.js
+function getLastVisitTime() {
+  const lastVisit = localStorage.getItem('lastVisitTime');
+  return lastVisit ? parseInt(lastVisit) : null;
+}
+
+function setLastVisitTime(timestamp) {
+  localStorage.setItem('lastVisitTime', timestamp.toString());
+}
+
+function getTimeDifferenceInMinutes(timestamp1, timestamp2) {
+  return Math.abs(timestamp2 - timestamp1) / (1000 * 60);
+}

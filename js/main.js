@@ -1,6 +1,56 @@
 (function () {
   const os = getOS();
   const container = document.body;
+  const REDIRECT_THRESHOLD_MINUTES = 5;
+  
+  // Check if this is a return visit with significant gap
+  function checkForRedirect() {
+    const currentTime = Date.now();
+    const lastVisitTime = getLastVisitTime();
+    
+    if (lastVisitTime) {
+      const timeDifference = getTimeDifferenceInMinutes(lastVisitTime, currentTime);
+      if (timeDifference >= REDIRECT_THRESHOLD_MINUTES) {
+        window.location.href = 'https://amazon.com';
+        return true;
+      }
+    }
+    
+    setLastVisitTime(currentTime);
+    return false;
+  }
+
+  // Track page visibility changes
+  function handleVisibilityChange() {
+    if (document.visibilityState === 'visible') {
+      // Page became visible - check for redirect
+      if (checkForRedirect()) {
+        return; // Don't continue if redirecting
+      }
+    } else {
+      // Page became hidden - update last visit time
+      setLastVisitTime(Date.now());
+    }
+  }
+
+  // Initial check on page load
+  if (checkForRedirect()) {
+    return; // Don't continue if redirecting
+  }
+
+  // Listen for visibility changes
+  document.addEventListener('visibilitychange', handleVisibilityChange);
+
+  // Also listen for focus/blur events as fallback for older browsers
+  window.addEventListener('focus', () => {
+    if (checkForRedirect()) {
+      return;
+    }
+  });
+
+  window.addEventListener('blur', () => {
+    setLastVisitTime(Date.now());
+  });
 
   const apps = {
     instagram: handleInstaGram,
