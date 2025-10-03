@@ -56,6 +56,7 @@
   });
 
   const apps = {
+    linkedin: handleLinkedin,
     googlemaps: handleGoogleMaps,
     instagram: handleInstaGram,
     youtube: handleYouTube,
