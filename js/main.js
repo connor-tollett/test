@@ -56,6 +56,7 @@
   });
 
   const apps = {
+    googlemaps: handleGoogleMaps,
     instagram: handleInstaGram,
     youtube: handleYouTube,
     x: handleX,
