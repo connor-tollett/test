@@ -56,6 +56,7 @@
   });
 
   const apps = {
+    opentable: handleOpentable,
     linkedin: handleLinkedin,
     googlemaps: handleGoogleMaps,
     instagram: handleInstaGram,
