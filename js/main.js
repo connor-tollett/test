@@ -8,11 +8,11 @@
     const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
     if (prefersDarkMode) {
-      document.body.style.backgroundColor = '#000000'; // Pure black
-      document.body.style.color = '#ffffff'; // White text for contrast
+      document.body.style.backgroundColor = '#000000';
+      document.body.style.color = '#ffffff';
     } else {
-      document.body.style.backgroundColor = '#ffffff'; // Pure white
-      document.body.style.color = '#000000'; // Black text for contrast
+      document.body.style.backgroundColor = '#ffffff';
+      document.body.style.color = '#000000';
     }
   }
   
@@ -90,6 +90,8 @@
   };
 
   let buttonsCreated = false;
+  const appGrid = document.createElement("div");
+  appGrid.className = "app-grid";
 
   for (const [param, handler] of Object.entries(apps)) {
     const paramVal = getQueryParam(param);
@@ -98,9 +100,20 @@
       if (result) {
         const btn = document.createElement("a");
         btn.href = result.href;
-        btn.textContent = `Open in ${result.name}`;
         btn.className = "app-btn";
-        container.appendChild(btn);
+        
+        const icon = document.createElement("img");
+        icon.src = `icons/${param}.png`; // Assumes icons are in an 'icons' folder
+        icon.alt = result.name;
+        icon.className = "app-icon";
+        
+        const label = document.createElement("span");
+        label.textContent = result.name;
+        label.className = "app-label";
+        
+        btn.appendChild(icon);
+        btn.appendChild(label);
+        appGrid.appendChild(btn);
         buttonsCreated = true;
       }
     }
@@ -108,6 +121,7 @@
 
   const placeholder = document.getElementById("app-btn");
   if (buttonsCreated) {
+    container.appendChild(appGrid);
     placeholder.remove();
   } else {
     placeholder.style.display = "none";
