@@ -3,6 +3,25 @@
   const container = document.body;
   const REDIRECT_THRESHOLD_MINUTES = 5;
   
+  // Add theme detection and application
+  function applyTheme() {
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (prefersDarkMode) {
+      document.body.style.backgroundColor = '#000000'; // Pure black
+      document.body.style.color = '#ffffff'; // White text for contrast
+    } else {
+      document.body.style.backgroundColor = '#ffffff'; // Pure white
+      document.body.style.color = '#000000'; // Black text for contrast
+    }
+  }
+  
+  // Apply theme on page load
+  applyTheme();
+  
+  // Listen for theme changes
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+  
   // Check if this is a return visit with significant gap
   function checkForRedirect() {
     const currentTime = Date.now();
