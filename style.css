@@ -50,41 +50,6 @@ body {
   font-weight: 400;
 }
 
-/* Hide the default placeholder */
 #app-btn {
   display: none;
-}
-
-/* Responsive adjustments for different screen sizes */
-@media (max-width: 320px) {
-  .app-grid {
-    max-width: 320px;
-    padding: 16px 12px;
-  }
-  
-  .app-icon {
-    width: 52px;
-    height: 52px;
-  }
-  
-  .app-label {
-    font-size: 11px;
-  }
-}
-
-@media (min-width: 414px) {
-  .app-grid {
-    max-width: 414px;
-    padding: 24px 20px;
-  }
-  
-  .app-icon {
-    width: 68px;
-    height: 68px;
-    border-radius: 15px;
-  }
-  
-  .app-label {
-    font-size: 13px;
-  }
 }
